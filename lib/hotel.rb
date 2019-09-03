@@ -14,14 +14,14 @@ module HotelSystem
     end
     
     def create_rooms
-      # room_number = 0
+      room_number = 0
       @amount_of_rooms.times do
-        room = HotelSystem::Room.new
-        # room_number += 1
+        room_number += 1
+        room = HotelSystem::Room.new(room_number)
         rooms.push(room)
       end
       
-      
+      # 
     end
     
   end 
