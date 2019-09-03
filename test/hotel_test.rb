@@ -16,13 +16,8 @@ describe "Hotel class" do
     end 
     
     it "will generate a room number for each instance of Room" do
-      new_hotel = HotelSystem::Hotel.new(1)
-      new_hotel.create_rooms
-      p "Kristina"
-      p new_hotel.rooms
-      # expect(new_hotel.rooms).must_equal 1
-      
-      
+      @hotel.create_rooms
+      expect(@hotel.rooms.first.room_number).must_equal 1
     end 
     
   end

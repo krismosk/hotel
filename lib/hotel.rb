@@ -21,7 +21,6 @@ module HotelSystem
         rooms.push(room)
       end
       
-      # 
     end
     
   end 
