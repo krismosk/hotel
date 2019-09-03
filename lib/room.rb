@@ -3,7 +3,7 @@ module HotelSystem
   attr_reader :room_number, :dates_reserved
   class Room
     def initialize
-      @room_number = room_number
+      @room_number = nil
       @dates_reserved = []
       
     end
