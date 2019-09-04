@@ -24,9 +24,8 @@ module HotelSystem
     end
     
     def make_reservation(start_date, end_date)
-      reservation_id = 0
-      # 
-      reservation = HotelSystem::Reservation.new
+      reservation_id = rand(100..1000)
+      reservation = HotelSystem::Reservation.new(reservation_id)
     end 
     
     def add_reservation(reservation)

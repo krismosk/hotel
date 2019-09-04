@@ -1,11 +1,11 @@
 require_relative 'hotel'
 module HotelSystem
   class Reservation
-    attr_reader :reservation_id, :room_number, :start_date, :end_date
+    attr_reader :reservation_id, :room, :start_date, :end_date
     
-    def initialize
+    def initialize(reservation_id)
       @reservation_id = reservation_id
-      @room_number = room_number
+      @room = room
       @start_date = start_date
       @end_date = end_date
     end
@@ -19,3 +19,4 @@ module HotelSystem
     end 
     
   end
+end
