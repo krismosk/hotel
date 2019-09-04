@@ -28,9 +28,10 @@ describe "Hotel class" do
     end 
     
     it "will create a new Reservation" do
-      start_time = Date.new(2019,03,22)
-      end_time = Date.new(2019,03,25)
-      expect(@hotel.make_reservation(start_time, end_time)).must_be_kind_of HotelSystem::Reservation
+      start_date = Date.new(2019,03,22)
+      end_date = Date.new(2019,03,25)
+      new_reservation = @hotel.make_reservation(start_date, end_date)
+      expect(new_reservation).must_be_kind_of HotelSystem::Reservation
     end
     
     

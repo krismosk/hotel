@@ -3,7 +3,7 @@ module HotelSystem
   class Reservation
     attr_reader :reservation_id, :room, :start_date, :end_date
     
-    def initialize(reservation_id)
+    def initialize(reservation_id:, start_date:, end_date:)
       @reservation_id = reservation_id
       @room = room
       @start_date = start_date

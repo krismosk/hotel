@@ -16,7 +16,6 @@ describe "Room class" do
     
     
     
-    
   end
   
   
