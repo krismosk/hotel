@@ -22,11 +22,7 @@ describe "Reservation class" do
   
   describe "Calculate duration of stay" do
     it "will return the total duration of the reservation" do 
-      # p @reservation.end_date.mjd
-      # p @reservation.start_date.mjd
-      # p @reservation.end_date.mjd - @reservation.start_date.mjd
       expect(@reservation.calculate_stay_duration).must_equal 5
-      
     end 
     
     

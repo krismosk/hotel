@@ -29,7 +29,7 @@ module HotelSystem
       elsif end_date == start_date
         raise ArgumentError.new("Error, reservation has a one night stay minimum.")
       end
-      reservation_id = rand(100..1000)
+      reservation_id = rand(100..500)
       reservation = HotelSystem::Reservation.new(reservation_id: reservation_id, start_date: start_date, end_date: end_date)
       
       
@@ -44,7 +44,7 @@ module HotelSystem
     def add_reservation(reservation)
       # Will take an instance of reservation and add it to 
       # it's list of reservations
-      
+      reservations.push(reservation)
       # it will add a reservation to the Room's list of reservations
     end
     

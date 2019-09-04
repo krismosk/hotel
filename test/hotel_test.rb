@@ -25,13 +25,20 @@ describe "Hotel class" do
   describe "Make_Reservation Method" do
     before do
       @hotel = HotelSystem::Hotel.new(20)
+      @start_date = Date.new(2019,03,22)
+      @end_date = Date.new(2019,03,25)
+      @reservation = @hotel.make_reservation(@start_date, @end_date)
     end 
     
     it "will create a new Reservation" do
-      start_date = Date.new(2019,03,22)
-      end_date = Date.new(2019,03,25)
-      expect(@hotel.make_reservation(start_date, end_date)).must_be_kind_of HotelSystem::Reservation
+      expect(@hotel.make_reservation(@start_date, @end_date)).must_be_kind_of HotelSystem::Reservation
     end
+    
+    it "will add the new reservation to the Hotel's list of reservations" do 
+      @hotel.add_reservation(@reservation)
+      expect(@hotel.reservations).must_include @reservation
+    end 
+    
     
     # it "will require start_date and end_date to be entered YYYYMMDD" do
     #   start_date = Date.parse("20190322")

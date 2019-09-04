@@ -8,6 +8,7 @@ module HotelSystem
       @room = room
       @start_date = start_date
       @end_date = end_date
+      # @total_cost = total_cost
     end
     
     def calculate_total_cost
@@ -16,6 +17,11 @@ module HotelSystem
     
     def calculate_stay_duration
       end_date.mjd - start_date.mjd
+      
+      # look into date.overlap 
+      # look into subtracting end_date - start_date, then add that number directly to start_date
+      # that will return a list of dates between the date range
+      # then add all of those dates to the specific list of reserved dates 
     end 
     
   end
