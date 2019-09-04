@@ -24,16 +24,16 @@ describe "Reservation class" do
     
   end
   
-  # describe "Calculate duration of stay" do
-  #   it "will return the total duration of the reservation" do 
-  
-  #     @reservation.start_date
-  #     @reservation.end_date
-  #   end 
-  
-  
-  
-  # end
+  describe "Calculate duration of stay" do
+    it "will return the total duration of the reservation" do 
+      
+      
+    end 
+    
+    
+    
+    
+  end
   
   
   

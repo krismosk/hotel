@@ -30,8 +30,23 @@ describe "Hotel class" do
     it "will create a new Reservation" do
       start_date = Date.new(2019,03,22)
       end_date = Date.new(2019,03,25)
-      new_reservation = @hotel.make_reservation(start_date, end_date)
-      expect(new_reservation).must_be_kind_of HotelSystem::Reservation
+      expect(@hotel.make_reservation(start_date, end_date)).must_be_kind_of HotelSystem::Reservation
+    end
+    
+    it "raises an error for end_date being earlier than start_date" do
+      start_date = Date.new(2019,03,22)
+      end_date = Date.new(2019,03,20)
+      expect do
+        @hotel.make_reservation(start_date, end_date)
+      end.must_raise ArgumentError
+    end
+    
+    it "raises an error for start_date and end_date being the same day" do
+      start_date = Date.new(2019,03,22)
+      end_date = Date.new(2019,03,22)
+      expect do
+        @hotel.make_reservation(start_date, end_date)
+      end.must_raise ArgumentError
     end
     
     

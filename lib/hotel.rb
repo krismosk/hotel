@@ -24,11 +24,16 @@ module HotelSystem
     end
     
     def make_reservation(start_date, end_date)
+      if end_date < start_date
+        raise ArgumentError.new("Error, the end date you entered #{end_date}, occurs before reservation start date, #{start_date}")
+      elsif end_date == start_date
+        raise ArgumentError.new("Error, reservation has a one night stay minimum.")
+      end
       reservation_id = rand(100..1000)
       reservation = HotelSystem::Reservation.new(reservation_id: reservation_id, start_date: start_date, end_date: end_date)
       
       
-      # it will add the start_date & end_date to the reservation start_date, end_date
+      
       # call find_available_rooms here to assign a room
       # find_available_rooms will return a list of available rooms
       # pick the first room from that list and assign it to the reservation 
