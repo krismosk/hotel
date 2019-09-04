@@ -17,16 +17,31 @@ module HotelSystem
       room_number = 0
       @amount_of_rooms.times do
         room_number += 1 
-        # consider injecting a dependency here
         room = HotelSystem::Room.new(room_number)
         rooms.push(room)
       end
       
     end
     
+    def make_reservation(start_date, end_date)
+      reservation_id = 0
+      # 
+      reservation = HotelSystem::Reservation.new
+    end 
+    
     def add_reservation(reservation)
       # Will take an instance of reservation and add it to 
       # it's list of reservations
+    end
+    
+    
+    def find_reservation(date)
+      
+    end 
+    
+    def find_available_rooms(date_range)
+      
+      
     end
     
   end 
