@@ -20,6 +20,7 @@ describe "Hotel class" do
       expect(@hotel.rooms.first.room_number).must_equal 1
     end 
     
+    
   end
   
   

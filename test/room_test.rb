@@ -10,6 +10,12 @@ describe "Room class" do
       expect(@room).must_be_kind_of HotelSystem::Room
     end
     
+    it "knows it's room number" do 
+      expect(@room.room_number).wont_be_nil
+    end
+    
+    
+    
     
   end
   

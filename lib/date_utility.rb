@@ -1,5 +1,5 @@
 module HotelSystem
-  class Date
+  class Date_Utility
     def initialize
       
       

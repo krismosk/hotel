@@ -5,7 +5,6 @@ module HotelSystem
     def initialize(room_number)
       @room_number = room_number
       @dates_reserved = []
-      
     end
     
     
