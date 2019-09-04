@@ -14,8 +14,8 @@ module HotelSystem
       # use trip duration and multiply by $200
     end
     
-    def duration_of_stay
-      # subtract end_date from start_date 
+    def calculate_stay_duration
+      end_date.mjd - start_date.mjd
     end 
     
   end

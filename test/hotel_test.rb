@@ -33,6 +33,18 @@ describe "Hotel class" do
       expect(@hotel.make_reservation(start_date, end_date)).must_be_kind_of HotelSystem::Reservation
     end
     
+    # it "will require start_date and end_date to be entered YYYYMMDD" do
+    #   start_date = Date.parse("20190322")
+    #   p start_date
+    #   end_date = Date.parse("03232019")
+    #   p end_date
+    
+    #   # # @hotel.make_reservation(start_date, end_date)
+    #   # expect do
+    #   #   @hotel.make_reservation(start_date, end_date)
+    #   # end.must_raise ArgumentError
+    # end
+    
     it "raises an error for end_date being earlier than start_date" do
       start_date = Date.new(2019,03,22)
       end_date = Date.new(2019,03,20)

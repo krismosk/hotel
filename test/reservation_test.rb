@@ -1,20 +1,16 @@
 require_relative 'test_helper'
 
 describe "Reservation class" do 
+  before do
+    @reservation = HotelSystem::Reservation.new(reservation_id: 101, start_date: Date.parse("20190320"), end_date: Date.parse("20190325"))
+  end
+  
   describe "Reservation instantiation" do
-    before do
-      # start_date = Date.new(2019,03,22)
-      # end_date = Date.new(2019,03,25)
-      @reservation = HotelSystem::Reservation.new(reservation_id: 101, start_date: Date.new(2019,03,25), end_date: Date.new(2019,03,25))
-    end
-    
     it "is an instance of Reservation" do 
       expect(@reservation).must_be_kind_of HotelSystem::Reservation
     end
     
     it "knows it's reservation number" do
-      p "Kristina"
-      p @reservation.reservation_id
       expect(@reservation.reservation_id).wont_be_nil
     end
     
@@ -26,7 +22,10 @@ describe "Reservation class" do
   
   describe "Calculate duration of stay" do
     it "will return the total duration of the reservation" do 
-      
+      # p @reservation.end_date.mjd
+      # p @reservation.start_date.mjd
+      # p @reservation.end_date.mjd - @reservation.start_date.mjd
+      expect(@reservation.calculate_stay_duration).must_equal 5
       
     end 
     
