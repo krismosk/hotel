@@ -16,8 +16,11 @@ module HotelSystem
     end
     
     def calculate_stay_duration
-      end_date.mjd - start_date.mjd
+      duration = end_date.mjd - start_date.mjd
       
+      
+      
+      return duration
       # look into date.overlap 
       # look into subtracting end_date - start_date, then add that number directly to start_date
       # that will return a list of dates between the date range

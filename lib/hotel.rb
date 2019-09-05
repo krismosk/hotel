@@ -32,20 +32,27 @@ module HotelSystem
       reservation_id = rand(100..500)
       reservation = HotelSystem::Reservation.new(reservation_id: reservation_id, start_date: start_date, end_date: end_date)
       
+      # add reservation dates to room
+      date_range = (reservation.calculate_stay_duration) - 1
+      
+      date_range.times do |i|
+        next_day = start_date + i
+        p next_day
+      end
+      
+      return reservation
+      
       
       
       # call find_available_rooms here to assign a room
       # find_available_rooms will return a list of available rooms
       # pick the first room from that list and assign it to the reservation 
-      # 
+      
       
     end 
     
     def add_reservation(reservation)
-      # Will take an instance of reservation and add it to 
-      # it's list of reservations
       reservations.push(reservation)
-      # it will add a reservation to the Room's list of reservations
     end
     
     
@@ -54,8 +61,16 @@ module HotelSystem
     end 
     
     def find_available_rooms(date_range)
-      # Give me a room that doesn't have this date reserved 
+      # hotel.rooms do |room|
+      #   if room.reservation_dates does not include all dates in the date range
+      #   assign that room to the reservation
+      #   add that new reservation to the room.date_reserved
       
+      
+      
+      # Give me a room that doesn't have this date reserved 
+      # return a list of available rooms
+      # choose the first room from the list 
     end
     
   end 

@@ -25,7 +25,7 @@ describe "Hotel class" do
   describe "Make_Reservation Method" do
     before do
       @hotel = HotelSystem::Hotel.new(20)
-      @start_date = Date.new(2019,03,22)
+      @start_date = Date.new(2019,03,20)
       @end_date = Date.new(2019,03,25)
       @reservation = @hotel.make_reservation(@start_date, @end_date)
     end 
@@ -38,7 +38,6 @@ describe "Hotel class" do
       @hotel.add_reservation(@reservation)
       expect(@hotel.reservations).must_include @reservation
     end 
-    
     
     # it "will require start_date and end_date to be entered YYYYMMDD" do
     #   start_date = Date.parse("20190322")
@@ -68,6 +67,9 @@ describe "Hotel class" do
       end.must_raise ArgumentError
     end
     
+    it "will find an available room to assign to the reservation" do
+      
+    end
     
     
     
