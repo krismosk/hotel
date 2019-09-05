@@ -19,6 +19,16 @@ describe "Hotel class" do
       @hotel.create_rooms
       expect(@hotel.rooms.first.room_number).must_equal 1
     end 
+  end
+  
+  describe "List rooms" do
+    before do
+      @hotel = HotelSystem::Hotel.new(20)
+    end
+    
+    it "will display a list of all rooms in Hotel" do
+      expect(@hotel.list_rooms).must_be_kind_of Array
+    end
     
   end
   

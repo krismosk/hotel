@@ -23,6 +23,11 @@ module HotelSystem
       
     end
     
+    def list_rooms
+      create_rooms
+      rooms
+    end
+    
     def make_reservation(start_date, end_date)
       if end_date < start_date
         raise ArgumentError.new("Error, the end date you entered #{end_date}, occurs before reservation start date, #{start_date}")
