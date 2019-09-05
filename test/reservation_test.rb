@@ -27,6 +27,13 @@ describe "Reservation class" do
     end 
   end
   
+  describe "Calculate total cost" do
+    it "will return the total cost of the reservation" do 
+      expect(@reservation.calculate_total_cost).must_equal 1000
+    end
+    
+  end
+  
   
   
 end
