@@ -30,61 +30,77 @@ module HotelSystem
         raise ArgumentError.new("Error, reservation has a one night stay minimum.")
       end
       reservation_id = rand(100..500)
-      reservation = HotelSystem::Reservation.new(reservation_id: reservation_id, start_date: start_date, end_date: end_date)
+      
+      room = rooms.sample 
+      
+      reservation = HotelSystem::Reservation.new(reservation_id: reservation_id, room: room, start_date: start_date, end_date: end_date)
+      
+      add_reservation(reservation)
+      room.reservations.push(reservation)
       
       
-      # loop through all rooms and check which rooms do not have any of the calendar days in their 
-      # reservation dates 
-      # add reservation dates to room's list of reserved dates when a reservation is made
+      # before making a reservation, take the requested start_date & end_date
+      # and loop through all hotel.rooms, if a room's start_date 
       
-      return reservation
+      # reservation(start_date, end_date)
+      # add the reservation to the room's list of reservations when the reservation is finalized
       
       # call find_available_rooms here to assign a room
       # find_available_rooms will return a list of available rooms
       # pick the first room from that list and assign it to the reservation 
       
       
+      
+      return reservation
+      
+      
+      
+      
     end 
-    
-    # TO-DO: Make Test
-    # calculate the calendar days in between the start and end date 
-    def calculate_calendar_days_in_reservation 
-      date_range = (reservation.calculate_stay_duration) - 1
-      
-      date_range.times do |i|
-        next_day = start_date + i
-        # TO DO: Add each "next_day" to a Room's list of reserved dates
-        p next_day
-      end
-      
-    end
     
     def add_reservation(reservation)
       reservations.push(reservation)
     end
+    # # TO-DO: Make Test
+    # # calculate the calendar days in between the start and end date 
+    # def calculate_calendar_days_in_reservation 
+    #   date_range = (reservation.calculate_stay_duration) - 1
+    
+    #   date_range.times do |i|
+    #     next_day = start_date + i
+    #     # TO DO: Add each "next_day" to a Room's list of reserved dates
+    #     p next_day
+    #   end
+    
+    # end
     
     
-    def find_reservation(date)
-      # Wave 1
-    end 
     
-    def find_available_rooms(start_date, end_date)
-      p "Kristina"
-      hotel.rooms.each do |room|
-        p room
-      end
-      
-      # hotel.rooms do |room|
-      #   if room.reservation_dates does not include all dates in the date range
-      #   assign that room to the reservation
-      #   add that new reservation to the room.date_reserved
-      
-      
-      
-      # Give me a room that doesn't have this date reserved 
-      # return a list of available rooms
-      # choose the first room from the list 
-    end
+    
+    # def find_reservation(date)
+    #   # Wave 1
+    # end 
+    
+    # def find_available_rooms(start_date, end_date)
+    #   rooms.each do |room|
+    #     p room
+    #   end
+    
+    
+    
+    
+    #   # hotel.rooms do |room|
+    #   #   if room.reservation_dates does not include all dates in the date range
+    #   #   assign that room to the reservation
+    #   #   add that new reservation to the room.date_reserved
+    
+    
+    
+    #   # Give me a room that doesn't have this date reserved 
+    #   # return a list of available rooms
+    #   # choose the first room from the list 
+    # end
     
   end 
 end
+

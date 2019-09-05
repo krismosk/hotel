@@ -1,10 +1,10 @@
 require_relative 'hotel'
 module HotelSystem
   class Room
-    attr_reader :room_number, :dates_reserved
+    attr_reader :room_number, :reservations
     def initialize(room_number)
       @room_number = room_number
-      @reservation_dates = []
+      @reservations = []
     end
     
     

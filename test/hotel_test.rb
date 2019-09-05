@@ -25,9 +25,13 @@ describe "Hotel class" do
   describe "Make_Reservation Method" do
     before do
       @hotel = HotelSystem::Hotel.new(20)
+      @hotel.create_rooms
+      @room = @hotel.rooms.sample
       @start_date = Date.new(2019,03,20)
       @end_date = Date.new(2019,03,25)
       @reservation = @hotel.make_reservation(@start_date, @end_date)
+      @hotel.add_reservation(@reservation)
+      @room.reservations.push(@reservation)
     end 
     
     it "will create a new Reservation" do
@@ -35,21 +39,12 @@ describe "Hotel class" do
     end
     
     it "will add the new reservation to the Hotel's list of reservations" do 
-      @hotel.add_reservation(@reservation)
       expect(@hotel.reservations).must_include @reservation
     end 
     
-    # it "will require start_date and end_date to be entered YYYYMMDD" do
-    #   start_date = Date.parse("20190322")
-    #   p start_date
-    #   end_date = Date.parse("03232019")
-    #   p end_date
-    
-    #   # # @hotel.make_reservation(start_date, end_date)
-    #   # expect do
-    #   #   @hotel.make_reservation(start_date, end_date)
-    #   # end.must_raise ArgumentError
-    # end
+    it "will add the new reservation to the Rooms's list of reservations" do 
+      expect(@room.reservations).must_include @reservation
+    end 
     
     it "raises an error for end_date being earlier than start_date" do
       start_date = Date.new(2019,03,22)
@@ -68,20 +63,27 @@ describe "Hotel class" do
     end
     
     # it "will find an available room to assign to the reservation" do
-    #   # check if 
+    #   @hotel.rooms.each do |room|
+    #     if room.reservations.start_date != @start_date
+    #     end
+    #   end
     # end
     
-    it "will assign an available room to the reservation" do
-      # expect that a reservation will contain an instance of room
+    it "will assign a room to the reservation" do
+      expect(@reservation.room).wont_be_nil
     end
     
+    # it "Find_available_rooms method" do
     
+    
+    
+    #   # it will return a list of room objects that do not have
+    #   # the passed in date in it's list of reservations
+    
+    # end
   end
   
-  describe "Find_available_rooms method" do
-    # it will return a list of room objects that do not have
-    # the passed in date in it's list of reservations
-  end
+  
   
   
   

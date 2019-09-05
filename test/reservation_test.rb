@@ -2,7 +2,7 @@ require_relative 'test_helper'
 
 describe "Reservation class" do 
   before do
-    @reservation = HotelSystem::Reservation.new(reservation_id: 101, start_date: Date.parse("20190320"), end_date: Date.parse("20190325"))
+    @reservation = HotelSystem::Reservation.new(reservation_id: 101, room: nil, start_date: Date.parse("20190320"), end_date: Date.parse("20190325"))
   end
   
   describe "Reservation instantiation" do
