@@ -14,10 +14,11 @@ module HotelSystem
     end
     
     def create_rooms
+      cost = 200
       room_number = 0
       @amount_of_rooms.times do
         room_number += 1 
-        room = HotelSystem::Room.new(room_number)
+        room = HotelSystem::Room.new(room_number, cost)
         rooms.push(room)
       end
       
