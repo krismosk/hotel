@@ -32,17 +32,12 @@ module HotelSystem
       reservation_id = rand(100..500)
       reservation = HotelSystem::Reservation.new(reservation_id: reservation_id, start_date: start_date, end_date: end_date)
       
-      # add reservation dates to room
-      date_range = (reservation.calculate_stay_duration) - 1
       
-      date_range.times do |i|
-        next_day = start_date + i
-        p next_day
-      end
+      # loop through all rooms and check which rooms do not have any of the calendar days in their 
+      # reservation dates 
+      # add reservation dates to room's list of reserved dates when a reservation is made
       
       return reservation
-      
-      
       
       # call find_available_rooms here to assign a room
       # find_available_rooms will return a list of available rooms
@@ -50,6 +45,19 @@ module HotelSystem
       
       
     end 
+    
+    # TO-DO: Make Test
+    # calculate the calendar days in between the start and end date 
+    def calculate_calendar_days_in_reservation 
+      date_range = (reservation.calculate_stay_duration) - 1
+      
+      date_range.times do |i|
+        next_day = start_date + i
+        # TO DO: Add each "next_day" to a Room's list of reserved dates
+        p next_day
+      end
+      
+    end
     
     def add_reservation(reservation)
       reservations.push(reservation)
@@ -60,7 +68,12 @@ module HotelSystem
       # Wave 1
     end 
     
-    def find_available_rooms(date_range)
+    def find_available_rooms(start_date, end_date)
+      p "Kristina"
+      hotel.rooms.each do |room|
+        p room
+      end
+      
       # hotel.rooms do |room|
       #   if room.reservation_dates does not include all dates in the date range
       #   assign that room to the reservation

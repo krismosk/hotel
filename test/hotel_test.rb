@@ -67,13 +67,21 @@ describe "Hotel class" do
       end.must_raise ArgumentError
     end
     
-    it "will find an available room to assign to the reservation" do
-      
+    # it "will find an available room to assign to the reservation" do
+    #   # check if 
+    # end
+    
+    it "will assign an available room to the reservation" do
+      # expect that a reservation will contain an instance of room
     end
     
     
-    
-  end 
+  end
+  
+  describe "Find_available_rooms method" do
+    # it will return a list of room objects that do not have
+    # the passed in date in it's list of reservations
+  end
   
   
   
