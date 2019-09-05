@@ -18,7 +18,7 @@ module HotelSystem
       room_number = 0
       @amount_of_rooms.times do
         room_number += 1 
-        room = HotelSystem::Room.new(room_number, cost)
+        room = HotelSystem::Room.new(room_number: room_number, cost: cost)
         rooms.push(room)
       end
       
@@ -37,7 +37,7 @@ module HotelSystem
       end
       reservation_id = rand(100..500)
       
-      room = rooms.sample 
+      room = rooms.first
       
       reservation = HotelSystem::Reservation.new(reservation_id: reservation_id, room: room, start_date: start_date, end_date: end_date)
       
@@ -56,7 +56,6 @@ module HotelSystem
       # pick the first room from that list and assign it to the reservation 
       
       
-      
       return reservation
       
       
@@ -67,6 +66,16 @@ module HotelSystem
     def add_reservation(reservation)
       reservations.push(reservation)
     end
+    
+    def find_reservations(date)
+      matched_reservations = []
+      reservations.each do |reservation|
+        if reservation.start_date == date
+          matched_reservations.push(reservation)
+        end
+      end
+    end
+    
     # # TO-DO: Make Test
     # # calculate the calendar days in between the start and end date 
     # def calculate_calendar_days_in_reservation 
@@ -79,13 +88,6 @@ module HotelSystem
     #   end
     
     # end
-    
-    
-    
-    
-    # def find_reservation(date)
-    #   # Wave 1
-    # end 
     
     # def find_available_rooms(start_date, end_date)
     #   rooms.each do |room|

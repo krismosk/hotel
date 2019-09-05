@@ -36,12 +36,10 @@ describe "Hotel class" do
     before do
       @hotel = HotelSystem::Hotel.new(20)
       @hotel.create_rooms
-      @room = @hotel.rooms.sample
+      @room = @hotel.rooms.first
       @start_date = Date.new(2019,03,20)
       @end_date = Date.new(2019,03,25)
       @reservation = @hotel.make_reservation(@start_date, @end_date)
-      @hotel.add_reservation(@reservation)
-      @room.reservations.push(@reservation)
     end 
     
     it "will create a new Reservation" do
@@ -72,25 +70,32 @@ describe "Hotel class" do
       end.must_raise ArgumentError
     end
     
-    # it "will find an available room to assign to the reservation" do
-    #   @hotel.rooms.each do |room|
-    #     if room.reservations.start_date != @start_date
-    #     end
-    #   end
-    # end
-    
     it "will assign a room to the reservation" do
       expect(@reservation.room).wont_be_nil
     end
     
-    # it "Find_available_rooms method" do
+  end
+  
+  describe "Find_Reservations method" do
+    before do
+      @hotel = HotelSystem::Hotel.new(20)
+      @hotel.create_rooms
+      
+      @reservation1 = @hotel.make_reservation(Date.new(2019,03,20), Date.new(2019,03,25))
+      @reservation2 = @hotel.make_reservation(Date.new(2019,03,19), Date.new(2019,03,22))
+    end
     
+    it "will take a date and return a list of all reservations booked on that date" do
+      query_date = Date.new(2019,03,21)
+      # p @hotel.find_reservations(query_date)
+      expect(@hotel.find_reservations(query_date)).must_include @reservation1 && @reservation2
+    end
     
+    it "will return nil if there are no reservations booked on that date" do
+      query_date = Date.new(2019,03,18)
+      expect(@hotel.find_reservations(query_date)).must_be_nil
+    end
     
-    #   # it will return a list of room objects that do not have
-    #   # the passed in date in it's list of reservations
-    
-    # end
   end
   
   
