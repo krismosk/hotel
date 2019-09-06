@@ -21,14 +21,14 @@ describe "Hotel class" do
     end 
   end
   
-  describe "List rooms" do
+  describe "#list_rooms" do
     it "will display a list of all rooms in Hotel" do
       hotel = HotelSystem::Hotel.new(20)
       expect(hotel.list_rooms).must_be_kind_of Array
     end
   end
   
-  describe "Make_Reservation Method" do
+  describe "#make_reservation" do
     before do
       @hotel = HotelSystem::Hotel.new(20)
       @hotel.create_rooms

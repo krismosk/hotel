@@ -7,10 +7,5 @@ module HotelSystem
       @cost = cost
       @reservations = []
     end
-    
-    
   end 
-  
-  
-  
 end

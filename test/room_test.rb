@@ -2,7 +2,7 @@ require_relative 'test_helper'
 
 describe "Room class" do 
   before do
-    @room = HotelSystem::Room.new(room_number: 1, cost: 200)
+    @room = HotelSystem::Room.new(room_number:, cost:)
   end
   
   describe "Room instantiation" do
@@ -17,13 +17,9 @@ describe "Room class" do
     it "knows it's room number" do 
       expect(@room.room_number).wont_be_nil
     end
+
+    it "is an array that stores reservations if they exist" do
+      expect(@room.reservations).must_be_kind_of Array
+    end
   end
-  
-  describe "Room Reservations" do
-    
-    
-  end
-  
-  
-  
 end
