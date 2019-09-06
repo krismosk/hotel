@@ -87,8 +87,10 @@ describe "Hotel class" do
     
     it "will take a date and return a list of all reservations booked on that date" do
       query_date = Date.new(2019,03,21)
-      # p @hotel.find_reservations(query_date)
-      expect(@hotel.find_reservations(query_date)).must_include @reservation1 && @reservation2
+      
+      reservations = @hotel.find_reservations(query_date)
+      expect(reservations).must_include @reservation1
+      expect(reservations).must_include @reservation2
     end
     
     it "will return nil if there are no reservations booked on that date" do

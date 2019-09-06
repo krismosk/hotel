@@ -35,6 +35,7 @@ module HotelSystem
       elsif end_date == start_date
         raise ArgumentError.new("Error, reservation has a one night stay minimum.")
       end
+      
       reservation_id = rand(100..500)
       
       room = rooms.first
@@ -68,14 +69,11 @@ module HotelSystem
     end
     
     def find_reservations(date)
-      matched_reservations = []
-      reservations.each do |reservation|
-        if reservation.start_date == date
-          matched_reservations.push(reservation)
-        end
+      reservations.select do |reservation|
+        reservation.date_range.include?(date)
       end
     end
-    
+    # 
     # # TO-DO: Make Test
     # # calculate the calendar days in between the start and end date 
     # def calculate_calendar_days_in_reservation 
@@ -83,8 +81,7 @@ module HotelSystem
     
     #   date_range.times do |i|
     #     next_day = start_date + i
-    #     # TO DO: Add each "next_day" to a Room's list of reserved dates
-    #     p next_day
+    
     #   end
     
     # end
