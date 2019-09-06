@@ -38,74 +38,57 @@ module HotelSystem
       
       reservation_id = rand(100..500)
       
-      room = rooms.first
+      available_rooms = find_available_rooms(start_date, end_date)
       
+      if available_rooms.empty?
+        raise ArgumentError.new("No available rooms.")
+      end
+      
+      room = available_rooms.first
       reservation = HotelSystem::Reservation.new(reservation_id: reservation_id, room: room, start_date: start_date, end_date: end_date)
       
       add_reservation(reservation)
       room.reservations.push(reservation)
-      
-      
-      # before making a reservation, take the requested start_date & end_date
-      # and loop through all hotel.rooms, if a room's start_date 
-      
-      # reservation(start_date, end_date)
-      # add the reservation to the room's list of reservations when the reservation is finalized
-      
-      # call find_available_rooms here to assign a room
-      # find_available_rooms will return a list of available rooms
-      # pick the first room from that list and assign it to the reservation 
-      
-      
-      return reservation
-      
-      
-      
-      
+     
+      reservation
     end 
     
     def add_reservation(reservation)
       reservations.push(reservation)
-    end
+    end 
     
     def find_reservations(date)
       reservations.select do |reservation|
         reservation.date_range.include?(date)
       end
     end
-    # 
-    # # TO-DO: Make Test
-    # # calculate the calendar days in between the start and end date 
-    # def calculate_calendar_days_in_reservation 
-    #   date_range = (reservation.calculate_stay_duration) - 1
     
-    #   date_range.times do |i|
-    #     next_day = start_date + i
-    
-    #   end
-    
-    # end
-    
-    # def find_available_rooms(start_date, end_date)
-    #   rooms.each do |room|
-    #     p room
-    #   end
-    
-    
-    
-    
-    #   # hotel.rooms do |room|
-    #   #   if room.reservation_dates does not include all dates in the date range
-    #   #   assign that room to the reservation
-    #   #   add that new reservation to the room.date_reserved
-    
-    
-    
-    #   # Give me a room that doesn't have this date reserved 
-    #   # return a list of available rooms
-    #   # choose the first room from the list 
-    # end
-    
+    def find_available_rooms(start_date, end_date)
+      range = (start_date..end_date-1)
+      available_rooms = []
+      
+      rooms.each do |room|    
+        overlaps = false
+        room.reservations.each do |reservation|
+          if check_for_overlap(reservation.date_range, range)
+            overlaps = true
+            break
+          end
+        end
+        if !overlaps
+          available_rooms << room
+        end
+      end
+      available_rooms
+    end
+
+    def check_for_overlap(first_reservation, second_reservation)
+      if first_reservation.end <= second_reservation.begin && \
+        first_reservation.begin >= second_reservation.end
+        return false 
+      end
+      return true
+    end
   end 
 end
 

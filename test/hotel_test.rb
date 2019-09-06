@@ -22,14 +22,10 @@ describe "Hotel class" do
   end
   
   describe "List rooms" do
-    before do
-      @hotel = HotelSystem::Hotel.new(20)
-    end
-    
     it "will display a list of all rooms in Hotel" do
-      expect(@hotel.list_rooms).must_be_kind_of Array
+      hotel = HotelSystem::Hotel.new(20)
+      expect(hotel.list_rooms).must_be_kind_of Array
     end
-    
   end
   
   describe "Make_Reservation Method" do
@@ -73,10 +69,25 @@ describe "Hotel class" do
     it "will assign a room to the reservation" do
       expect(@reservation.room).wont_be_nil
     end
-    
   end
   
-  describe "Find_Reservations method" do
+  describe "#find_available_rooms" do
+    describe "when there are no available rooms between start_date and end_date" do
+      it "returns and empty array" do
+        hotel = HotelSystem::Hotel.new(1)
+        hotel.create_rooms
+        reservation = hotel.make_reservation(Date.new(2019,3,20),Date.new(2019,3,25))
+        
+        expect(hotel.find_available_rooms(Date.new(2019,3,22), Date.new(2019,3,26))).must_equal []
+      end
+    end
+    
+    describe "when there are available rooms between start_date and end_date" do
+      it "returns an array of rooms"
+    end
+  end
+
+  describe "#find_reservation" do
     before do
       @hotel = HotelSystem::Hotel.new(20)
       @hotel.create_rooms
@@ -84,7 +95,7 @@ describe "Hotel class" do
       @reservation1 = @hotel.make_reservation(Date.new(2019,03,20), Date.new(2019,03,25))
       @reservation2 = @hotel.make_reservation(Date.new(2019,03,19), Date.new(2019,03,22))
     end
-    
+
     it "will take a date and return a list of all reservations booked on that date" do
       query_date = Date.new(2019,03,21)
       
@@ -92,16 +103,10 @@ describe "Hotel class" do
       expect(reservations).must_include @reservation1
       expect(reservations).must_include @reservation2
     end
-    
+
     it "will return nil if there are no reservations booked on that date" do
       query_date = Date.new(2019,03,18)
-      expect(@hotel.find_reservations(query_date)).must_be_nil
+      expect(@hotel.find_reservations(query_date)).must_equal []
     end
-    
   end
-  
-  
-  
-  
-  
 end

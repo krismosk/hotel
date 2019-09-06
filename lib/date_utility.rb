@@ -3,9 +3,10 @@ module HotelSystem
     def initialize
       
     end
-    
-    def check_date_overlap
+
+    def check_date_overlap(range1, range2)
       # take in a date and check if it overlaps with other reserved dates
+      
     end 
     
     def validate_dates

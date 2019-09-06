@@ -8,7 +8,7 @@ module HotelSystem
       @room = room
       @start_date = start_date
       @end_date = end_date
-      @date_range = (start_date..end_date).to_a
+      @date_range = (start_date..end_date)
       # @total_cost = total_cost
     end
     
