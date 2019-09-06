@@ -40,7 +40,7 @@ module HotelSystem
       available_rooms = find_available_rooms(start_date, end_date)
       
       if available_rooms.empty?
-        raise ArgumentError.new("No available rooms.")
+        raise StandardError.new("No available rooms.")
       end
       
       room = available_rooms.first

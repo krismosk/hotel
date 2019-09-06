@@ -22,18 +22,4 @@ describe "Room class" do
       expect(room.reservations).must_be_kind_of Array
     end
   end
-end
-
- 
-    # it "knows it's room rate" do
-    #   expect(@room.cost).must_equal 200
-    # end 
-    
-    # it "knows it's room number" do 
-    #   expect(@room.room_number).wont_be_nil
-    # end
-
-    # it "is an array that stores reservations if they exist" do
-    #   expect(@room.reservations).must_be_kind_of Array
-    # end
-    # 
+end 

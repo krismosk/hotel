@@ -1,15 +1,17 @@
 require_relative 'test_helper'
 
 describe "Hotel class" do 
+  before do
+    @hotel = HotelSystem::Hotel.new(20)
+  end
+
   describe "Hotel instantiation" do
-    before do
-      @hotel = HotelSystem::Hotel.new(20)
-    end
-    
     it "is an instance of Hotel" do 
       expect(@hotel).must_be_kind_of HotelSystem::Hotel
     end
-    
+  end
+
+  describe "#create_rooms" do
     it "will create the correct number of rooms" do
       @hotel.create_rooms
       expect(@hotel.rooms.length).must_equal 20
@@ -20,11 +22,13 @@ describe "Hotel class" do
       expect(@hotel.rooms.first.room_number).must_equal 1
     end 
   end
-  
+    
   describe "#list_rooms" do
-    it "will display a list of all rooms in Hotel" do
+    it "will return a list of all rooms in Hotel" do
       hotel = HotelSystem::Hotel.new(20)
-      expect(hotel.list_rooms).must_be_kind_of Array
+      rooms_array = hotel.list_rooms
+      expect(rooms_array).must_be_kind_of Array
+      expect(rooms_array.length).must_equal 20
     end
   end
   
@@ -66,14 +70,25 @@ describe "Hotel class" do
       end.must_raise ArgumentError
     end
     
-    it "will assign a room to the reservation" do
-      expect(@reservation.room).wont_be_nil
+    it "raises an error if there are no available rooms" do 
+      hotel = HotelSystem::Hotel.new(1)
+      hotel.create_rooms
+      expect do 
+        (hotel.make_reservation(Date.new(2019,03,20), Date.new(2019,03,25)).find_available_rooms(Date.new(2019,3,20), Date.new(2019,3,25)))
+      end.must_raise StandardError
+    end
+
+    it "will assign an available room to the reservation" do
+      hotel = HotelSystem::Hotel.new(2)
+      hotel.create_rooms
+      hotel.make_reservation(Date.new(2019,03,20), Date.new(2019,03,25))
+      expect(@reservation.room.room_number).must_equal 1
     end
   end
   
   describe "#find_available_rooms" do
     describe "when there are no available rooms between start_date and end_date" do
-      it "returns and empty array" do
+      it "returns an empty array" do
         hotel = HotelSystem::Hotel.new(1)
         hotel.create_rooms
         reservation = hotel.make_reservation(Date.new(2019,3,20),Date.new(2019,3,25))
