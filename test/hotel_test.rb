@@ -84,6 +84,7 @@ describe "Hotel class" do
     
     describe "when there are available rooms between start_date and end_date" do
       it "returns an array of rooms"
+
     end
   end
 
@@ -109,4 +110,9 @@ describe "Hotel class" do
       expect(@hotel.find_reservations(query_date)).must_equal []
     end
   end
+
+  # describe "#check_for_overlap do"
+
+
+  # end
 end

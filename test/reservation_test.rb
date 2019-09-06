@@ -19,6 +19,9 @@ describe "Reservation class" do
       expect(@reservation.room).must_be_kind_of HotelSystem::Room
     end
     
+    it "will contain a date range" do 
+      expect(@reservation.date_range).must_be_kind_of Range
+    end
   end
   
   describe "Calculate duration of stay" do
@@ -31,9 +34,5 @@ describe "Reservation class" do
     it "will return the total cost of the reservation" do 
       expect(@reservation.calculate_total_cost).must_equal 1000
     end
-    
   end
-  
-  
-  
 end

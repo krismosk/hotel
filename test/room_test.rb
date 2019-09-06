@@ -1,25 +1,39 @@
 require_relative 'test_helper'
 
 describe "Room class" do 
-  before do
-    @room = HotelSystem::Room.new(room_number:, cost:)
+  def build_room
+    return HotelSystem::Room.new(room_number: 1, cost: 200)
   end
   
-  describe "Room instantiation" do
+  describe "Initializer" do
     it "is an instance of Room" do 
-      expect(@room).must_be_kind_of HotelSystem::Room
-    end
-    
-    it "knows it's room rate" do
-      expect(@room.cost).must_equal 200
-    end
-    
-    it "knows it's room number" do 
-      expect(@room.room_number).wont_be_nil
+      room = build_room
+      expect(room).must_be_kind_of HotelSystem::Room
     end
 
-    it "is an array that stores reservations if they exist" do
-      expect(@room.reservations).must_be_kind_of Array
+    it "establishes the base data structures when instantiated" do
+      room = build_room
+      [:room_number, :cost, :reservations].each do |attribute|
+        expect(room).must_respond_to attribute
+      end
+      
+      expect(room.room_number).wont_be_nil
+      expect(room.cost).must_equal 200
+      expect(room.reservations).must_be_kind_of Array
     end
   end
 end
+
+ 
+    # it "knows it's room rate" do
+    #   expect(@room.cost).must_equal 200
+    # end 
+    
+    # it "knows it's room number" do 
+    #   expect(@room.room_number).wont_be_nil
+    # end
+
+    # it "is an array that stores reservations if they exist" do
+    #   expect(@room.reservations).must_be_kind_of Array
+    # end
+    # 
