@@ -84,6 +84,11 @@ describe "Hotel class" do
       hotel.make_reservation(Date.new(2019,03,20), Date.new(2019,03,25))
       expect(@reservation.room.room_number).must_equal 1
     end
+
+    it "will not assign a room that overlaps" do
+      # call .find_available_rooms 
+    end
+
   end
   
   describe "#find_available_rooms" do
@@ -98,8 +103,16 @@ describe "Hotel class" do
     end
     
     describe "when there are available rooms between start_date and end_date" do
-      it "returns an array of rooms"
+      it "returns an array of rooms" do
+        hotel = HotelSystem::Hotel.new(2)
+        hotel.create_rooms
+        reservation1 = hotel.make_reservation(Date.new(2019,3,20),Date.new(2019,3,25))
+        reservation2 = hotel.make_reservation(Date.new(2019,3,23),Date.new(2019,3,26))
+        expect(hotel.reservations.length).must_equal 2
 
+        expect(hotel.find_available_rooms(Date.new(2019,3,29), Date.new(2019,4,2))).must_include reservation1.room
+        expect(hotel.find_available_rooms(Date.new(2019,3,29), Date.new(2019,4,2))).must_include reservation1.room
+      end
     end
   end
 
