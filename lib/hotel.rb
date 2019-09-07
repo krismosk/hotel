@@ -82,9 +82,7 @@ module HotelSystem
     end
 
     def check_for_overlap(first_date_range, second_date_range)
-      if first_date_range.end <= second_date_range.begin || \
-        # if the first date_range is greater than or equal to 
-        first_date_range.begin >= second_date_range.end
+      if first_date_range.end <= second_date_range.begin || first_date_range.begin >= second_date_range.end
         return false 
       end
       return true

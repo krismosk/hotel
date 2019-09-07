@@ -84,11 +84,6 @@ describe "Hotel class" do
       hotel.make_reservation(Date.new(2019,03,20), Date.new(2019,03,25))
       expect(@reservation.room.room_number).must_equal 1
     end
-
-    it "will not assign a room that overlaps" do
-      # call .find_available_rooms 
-    end
-
   end
   
   describe "#find_available_rooms" do
@@ -97,7 +92,6 @@ describe "Hotel class" do
         hotel = HotelSystem::Hotel.new(1)
         hotel.create_rooms
         reservation = hotel.make_reservation(Date.new(2019,3,20),Date.new(2019,3,25))
-        
         expect(hotel.find_available_rooms(Date.new(2019,3,22), Date.new(2019,3,26))).must_equal []
       end
     end
@@ -109,7 +103,6 @@ describe "Hotel class" do
         reservation1 = hotel.make_reservation(Date.new(2019,3,20),Date.new(2019,3,25))
         reservation2 = hotel.make_reservation(Date.new(2019,3,23),Date.new(2019,3,26))
         expect(hotel.reservations.length).must_equal 2
-
         expect(hotel.find_available_rooms(Date.new(2019,3,29), Date.new(2019,4,2))).must_include reservation1.room
         expect(hotel.find_available_rooms(Date.new(2019,3,29), Date.new(2019,4,2))).must_include reservation1.room
       end
@@ -120,14 +113,12 @@ describe "Hotel class" do
     before do
       @hotel = HotelSystem::Hotel.new(20)
       @hotel.create_rooms
-      
       @reservation1 = @hotel.make_reservation(Date.new(2019,03,20), Date.new(2019,03,25))
       @reservation2 = @hotel.make_reservation(Date.new(2019,03,19), Date.new(2019,03,22))
     end
 
     it "will take a date and return a list of all reservations booked on that date" do
       query_date = Date.new(2019,03,21)
-      
       reservations = @hotel.find_reservations(query_date)
       expect(reservations).must_include @reservation1
       expect(reservations).must_include @reservation2
@@ -139,8 +130,16 @@ describe "Hotel class" do
     end
   end
 
-  # describe "#check_for_overlap do"
+  describe "#check_for_overlap" do
+    it "will return false if dates do not overlap" do
+      hotel = HotelSystem::Hotel.new(1)
+      hotel.create_rooms
+      reservation1 = hotel.make_reservation(Date.new(2019,03,20), Date.new(2019,03,25))
+      # reservation2 = hotel.make_reservation(Date.new(2019,03,19), Date.new(2019,03,22))
 
 
-  # end
+      expect(hotel.check_for_overlap((Date.new(2019,03,26)..Date.new(2019,03,28)), (Date.new(2019,03,20)..Date.new(2019,03,25)))).must_equal false
+    end
+
+  end
 end
