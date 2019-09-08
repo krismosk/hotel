@@ -1,3 +1,7 @@
 1. Refactor all tests to remove before/do blocks to increase readability 
 2. Remove reservation_id from reservation and all corresponding tests. 
   - I realized that I never needed to use the reservation_id anywhere.
+3. Standardize my describe block naming convention
+4. De-couple some of my method calls 
+5. Move some of the helper methods from Hotel to another class to clean things up
+6. Add both helper methods in Reservation class inside of initializer 
