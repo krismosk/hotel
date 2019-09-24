@@ -52,31 +52,21 @@ Bonus question once you've read Metz ch. 3: Which implementation is more loosely
 
 -- Hotel Class --
 What is this class's responsibility?
+ - Create rooms
+ - Making reservations
+
 
 Is this class responsible for exactly one thing?
+ - No
 
 Does this class take on any responsibility that should be delegated to "lower level" classes?
+- Yes, validate_dates and check_for_overlap can be moved to Reservation
 
 Is there code in other classes that directly manipulates this class's instance variables?
+  - No
 
 What changes would I need to make to improve this design?
+- Move the methods from hotel to reservation, make them class methods in Reservation 
 
 How would the new design be a new improvement? 
-
--- Reservation Class --
-What is this class's responsibility?
-
-Is this class responsible for exactly one thing?
-
-Does this class take on any responsibility that should be delegated to "lower level" classes?
-
-Is there code in other classes that directly manipulates this class's instance variables?
-
--- Room Class --
-What is this class's responsibility?
-
-Is this class responsible for exactly one thing?
-
-Does this class take on any responsibility that should be delegated to "lower level" classes?
-
-Is there code in other classes that directly manipulates this class's instance variables?
+ - This change would improve the design because Hotel would only be focused on making rooms and a reservations, the logic to make a reservation would be held in Reservation

@@ -3,14 +3,15 @@ require_relative 'test_helper'
 describe "Hotel class" do 
   before do
     @hotel = HotelSystem::Hotel.new(20)
+    # Add rooms to hotel
   end
-
+  
   describe "Hotel instantiation" do
     it "is an instance of Hotel" do 
       expect(@hotel).must_be_kind_of HotelSystem::Hotel
     end
   end
-
+  
   describe "#create_rooms" do
     it "will create the correct number of rooms" do
       @hotel.create_rooms
@@ -22,10 +23,11 @@ describe "Hotel class" do
       expect(@hotel.rooms.first.room_number).must_equal 1
     end 
   end
-    
+  
   describe "#list_rooms" do
     it "will return a list of all rooms in Hotel" do
       hotel = HotelSystem::Hotel.new(20)
+      hotel.create_rooms
       rooms_array = hotel.list_rooms
       expect(rooms_array).must_be_kind_of Array
       expect(rooms_array.length).must_equal 20
@@ -77,7 +79,7 @@ describe "Hotel class" do
         (hotel.make_reservation(Date.new(2019,03,20), Date.new(2019,03,25)).find_available_rooms(Date.new(2019,3,20), Date.new(2019,3,25)))
       end.must_raise StandardError
     end
-
+    
     it "will assign an available room to the reservation" do
       hotel = HotelSystem::Hotel.new(2)
       hotel.create_rooms
@@ -108,7 +110,7 @@ describe "Hotel class" do
       end
     end
   end
-
+  
   describe "#find_reservation" do
     before do
       @hotel = HotelSystem::Hotel.new(20)
@@ -116,28 +118,17 @@ describe "Hotel class" do
       @reservation1 = @hotel.make_reservation(Date.new(2019,03,20), Date.new(2019,03,25))
       @reservation2 = @hotel.make_reservation(Date.new(2019,03,19), Date.new(2019,03,22))
     end
-
+    
     it "will take a date and return a list of all reservations booked on that date" do
       query_date = Date.new(2019,03,21)
       reservations = @hotel.find_reservations(query_date)
       expect(reservations).must_include @reservation1
       expect(reservations).must_include @reservation2
     end
-
+    
     it "will return nil if there are no reservations booked on that date" do
       query_date = Date.new(2019,03,18)
       expect(@hotel.find_reservations(query_date)).must_equal []
     end
-  end
-
-  describe "#check_for_overlap" do
-    it "will return false if dates do not overlap" do
-      hotel = HotelSystem::Hotel.new(1)
-      hotel.create_rooms
-      reservation1 = hotel.make_reservation(Date.new(2019,03,20), Date.new(2019,03,25))
-  
-      expect(hotel.check_for_overlap((Date.new(2019,03,26)..Date.new(2019,03,28)), (Date.new(2019,03,20)..Date.new(2019,03,25)))).must_equal false
-    end
-
   end
 end

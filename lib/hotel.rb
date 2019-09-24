@@ -23,18 +23,14 @@ module HotelSystem
     end
     
     def list_rooms
-      create_rooms
-      rooms
+      rooms.each do |room|
+        puts room
+      end
+      return rooms
     end
     
     def make_reservation(start_date, end_date)
-      if end_date < start_date
-        raise ArgumentError.new("Error, the end date you entered #{end_date}, occurs before reservation start date, #{start_date}")
-      elsif end_date == start_date
-        raise ArgumentError.new("Error, reservation has a one night stay minimum.")
-      end
-      
-      reservation_id = rand(100..500)
+      HotelSystem::Reservation.validate_dates(start_date, end_date)
       
       available_rooms = find_available_rooms(start_date, end_date)
       
@@ -43,11 +39,11 @@ module HotelSystem
       end
       
       room = available_rooms.first
-      reservation = HotelSystem::Reservation.new(reservation_id: reservation_id, room: room, start_date: start_date, end_date: end_date)
+      reservation = HotelSystem::Reservation.new(room: room, start_date: start_date, end_date: end_date)
       
       add_reservation(reservation)
       room.reservations.push(reservation)
-     
+      
       reservation
     end 
     
@@ -68,7 +64,7 @@ module HotelSystem
       rooms.each do |room|    
         overlaps = false
         room.reservations.each do |reservation|
-          if check_for_overlap(reservation.date_range, range)
+          if HotelSystem::Reservation.check_for_overlap(reservation.date_range, range)
             overlaps = true
             break
           end
@@ -79,12 +75,6 @@ module HotelSystem
       end
       available_rooms
     end
-
-    def check_for_overlap(first_date_range, second_date_range)
-      if first_date_range.end <= second_date_range.begin || first_date_range.begin >= second_date_range.end
-        return false 
-      end
-      return true
-    end
+    
   end 
 end
