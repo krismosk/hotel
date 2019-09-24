@@ -20,7 +20,6 @@ module HotelSystem
         room = HotelSystem::Room.new(room_number: room_number, cost: cost)
         rooms.push(room)
       end
-      
     end
     
     def list_rooms
@@ -89,4 +88,3 @@ module HotelSystem
     end
   end 
 end
-

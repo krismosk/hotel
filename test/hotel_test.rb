@@ -135,9 +135,7 @@ describe "Hotel class" do
       hotel = HotelSystem::Hotel.new(1)
       hotel.create_rooms
       reservation1 = hotel.make_reservation(Date.new(2019,03,20), Date.new(2019,03,25))
-      # reservation2 = hotel.make_reservation(Date.new(2019,03,19), Date.new(2019,03,22))
-
-
+  
       expect(hotel.check_for_overlap((Date.new(2019,03,26)..Date.new(2019,03,28)), (Date.new(2019,03,20)..Date.new(2019,03,25)))).must_equal false
     end
 
